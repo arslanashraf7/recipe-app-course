@@ -65,10 +65,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return serializers.RecipeDetailSerializer
 
-        return serializers.RecipeSerializer
+        return self.serializer_class
 
-    # def perform_create(self, serializer):
-    #     """
-    #     Create a new recipe object with user association of logged in user
-    #     """
-    #     serializer.save(user=self.request.user)
+    def perform_create(self, serializer):
+        """
+        Create a new recipe object with user association of logged in user
+        """
+        serializer.save(user=self.request.user)
